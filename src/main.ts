@@ -2,6 +2,12 @@ type Args = {
 	[name: string]: string | true;
 };
 
+/**
+ *
+ * @param command The raw command string.
+ * @param options The command prefix, and the positional arg's name.
+ * @returns The command name and all used arguments.
+ */
 export function parseArgs(
 	command: string,
 	options: {
