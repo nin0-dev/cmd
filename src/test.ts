@@ -1,6 +1,6 @@
 import { parseArgs } from "./main.ts";
 
-const testString = `!ban --fakeUser nin0`;
+const testString = `!ban @nin0.dev --reason "annoying" -p`;
 
 console.log(
 	parseArgs(testString, {
