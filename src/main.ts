@@ -1,10 +1,17 @@
+type Args = {
+	[name: string]: string | true;
+};
+
 export function parseArgs(
 	command: string,
 	options: {
 		positionalArgumentName?: string;
 		prefix: string;
 	}
-) {
+): {
+	name: string;
+	args?: Args;
+} {
 	const initialRegex = new RegExp(
 		`^${options.prefix}([\-_a-zA-Z0-9]{1,32})(?: (.+))?$`
 	);
@@ -13,9 +20,7 @@ export function parseArgs(
 
 	const [_fullCmd, commandName, argsString] = command.match(initialRegex)!;
 
-	const args: {
-		[name: string]: string | boolean;
-	} = {};
+	const args: Args = {};
 	if (argsString) {
 		const argsMatch = argsString.matchAll(argRegex);
 		let workingArgsString = argsString;
@@ -47,5 +52,5 @@ export function parseArgs(
 			);
 	}
 
-	return { commandName, args };
+	return { name: commandName, args };
 }
